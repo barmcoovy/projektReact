@@ -60,6 +60,15 @@ const OvertimeTable: React.FC = () => {
       number: 12,
     },
   ];
+
+  function formatHoursMinutes(value: number) {
+    const hours = Math.floor(value);
+    const minutes = Math.round((value - hours) * 60);
+    if (hours === 0 && minutes === 0) return "";
+    if (hours > 0 && minutes > 0) return `${hours} godz ${minutes} min`;
+    if (hours > 0) return `${hours} godz`;
+    return `${minutes} min`;
+  }
   const [selected, setSelected] = useState({
     month: months[0].number,
     year: years[0],
@@ -116,13 +125,16 @@ const OvertimeTable: React.FC = () => {
           {weeks.map((week, index) => (
             <tr key={index}>
               <td className="border border-black p-1">
-                {week.start.toLocaleDateString()} –<br />
+                {week.start.toLocaleDateString()}
+                <br />
                 {week.end.toLocaleDateString()}
               </td>
-              <td className="border border-black p-1"></td>
+              <td className="border border-black p-1">
+                {formatHoursMinutes(hours)}
+              </td>
               {[...Array(5)].map((_, i) => (
                 <td key={i} className="border border-black p-1">
-                  {hours > 0 ? hours / 5 : ""}
+                  {hours > 0 ? formatHoursMinutes(hours / 5) : ""}
                 </td>
               ))}
             </tr>
