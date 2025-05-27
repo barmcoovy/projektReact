@@ -1,54 +1,89 @@
-# React + TypeScript + Vite
+# Projekcik na aplikację internetową
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Prosta aplikacja prezentująca siatkę godzin ponadwymiarowych nauczyciela.
 
-Currently, two official plugins are available:
+## Spis treści
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Opis projektu](#opis-projektu)
+- [Funkcjonalności](#funkcjonalności)
+- [Instalacja](#instalacja)
+- [Uruchamianie aplikacji](#uruchamianie-aplikacji)
+- [Struktura katalogów](#struktura-katalogów)
+- [Technologie](#technologie)
+- [Autor](#autor)
 
-## Expanding the ESLint configuration
+## Opis projektu
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Aplikacja umożliwia wyświetlanie i edycję tygodniowej liczby godzin oraz rozliczanie godzin ponadwymiarowych w wybranym miesiącu i roku. Użytkownik może wybrać miesiąc, rok oraz wprowadzić tygodniową liczbę godzin, a aplikacja automatycznie wylicza rozkład godzin na tygodnie i dni robocze.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Funkcjonalności
+
+- Wybór miesiąca i roku rozliczenia.
+- Edycja tygodniowej liczby godzin.
+- Automatyczne wyliczanie tygodni i rozkładu godzin na dni.
+- Przejrzysta tabela prezentująca dane.
+
+## Instalacja
+
+1. Sklonuj repozytorium:
+   ```sh
+   git clone https://github.com/barmcoovy/projektReact.git
+   ```
+2. Przejdź do katalogu projektu:
+   ```sh
+   cd projektReact
+   ```
+3. Zainstaluj zależności:
+   ```sh
+   npm install
+   ```
+
+## Uruchamianie aplikacji
+
+Aby uruchomić aplikację w trybie deweloperskim:
+
+```sh
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Aby zbudować aplikację produkcyjnie:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```sh
+npm run build
 ```
+
+Aby zobaczyć podgląd zbudowanej aplikacji:
+
+```sh
+npm run preview
+```
+
+## Struktura katalogów
+
+```
+projekt-aplikacjeInternetowe/
+├── public/
+├── src/                   # Kod źródłowy aplikacji
+│   ├── components/        # Komponenty React
+│   │   ├── Hours.tsx
+│   │   ├── Months.tsx
+│   │   ├── OvertimeTable.tsx
+│   │   └── utils/
+│   │       └── dateUtils.ts
+│   ├── App.tsx            # Główny komponent aplikacji
+│   ├── main.tsx           # Punkt wejścia aplikacji
+│   └── ...                # Pliki stylów i inne
+├── package.json           # Zależności i skrypty
+├── vite.config.ts         # Konfiguracja Vite
+└── README.md              # Dokumentacja
+```
+
+## Technologie
+
+- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/) – narzędzie do stylowania
+
+## Autor
+
+Projekt został stworzony przez barmcoovy
