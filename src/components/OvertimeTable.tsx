@@ -64,14 +64,10 @@ const OvertimeTable: React.FC = () => {
     month: months[0].number,
     year: years[0],
   });
-
   const [hours, setHours] = React.useState<number>(0);
   const [editing, setEditing] = React.useState<boolean>(false);
 
-  const [weeks, setWeeks] = useState<WeekRange[]>(
-    getFourFullWeeks(1, 2025)
-    // getFourFullWeeks(Number(selected.month), selected.year)
-  );
+  const [weeks, setWeeks] = useState<WeekRange[]>(getFourFullWeeks(1, 2025));
 
   return (
     <div className="p-4">
@@ -81,6 +77,7 @@ const OvertimeTable: React.FC = () => {
           selected={selected}
           setSelected={setSelected}
           months={months}
+          setWeekRange={setWeeks}
         />
       </h2>
       <h3 className="text-md mb-4 text-center uppercase">
@@ -113,8 +110,6 @@ const OvertimeTable: React.FC = () => {
             <th className="border border-black p-1">S</th>
             <th className="border border-black p-1">CZ</th>
             <th className="border border-black p-1">P</th>
-            <th className="border border-black p-1">S</th>
-            <th className="border border-black p-1">N</th>
           </tr>
         </thead>
         <tbody>
@@ -125,9 +120,9 @@ const OvertimeTable: React.FC = () => {
                 {week.end.toLocaleDateString()}
               </td>
               <td className="border border-black p-1"></td>
-              {[...Array(7)].map((_, i) => (
+              {[...Array(5)].map((_, i) => (
                 <td key={i} className="border border-black p-1">
-                  {/* You can customize cell content as needed */}N
+                  {hours > 0 ? hours / 5 : ""}
                 </td>
               ))}
             </tr>

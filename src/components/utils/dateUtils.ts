@@ -4,13 +4,13 @@ export function getFourFullWeeks(month: number, year: number): WeekRange[] {
   const firstOfMonth = new Date(year, month - 1, 1);
   let start = new Date(firstOfMonth);
 
-  if (firstOfMonth.getDay() === 5) {
-    const diffToMonday = (firstOfMonth.getDay() + 6) % 7;
-    start.setDate(firstOfMonth.getDate() - diffToMonday);
+  // Jeśli 1. dzień miesiąca to niedziela, zaczynamy od 2. dnia miesiąca
+  if (firstOfMonth.getDay() === 0) {
+    start.setDate(2);
   } else {
-    const day = firstOfMonth.getDay();
-    const diff = day === 0 ? 6 : day - 1;
-    start.setDate(firstOfMonth.getDate() - diff);
+    // W innym przypadku szukamy pierwszego poniedziałku miesiąca
+    const diff = (8 - firstOfMonth.getDay()) % 7;
+    start.setDate(firstOfMonth.getDate() + diff);
   }
 
   const weeks: WeekRange[] = [];
