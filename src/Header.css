@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  flex-direction: column;
+}
+.months-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  gap: 20px;
+  align-items: center;
+}
