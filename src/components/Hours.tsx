@@ -46,6 +46,9 @@ const Hours: React.FC<HoursProps> = ({
           </span>
         )}
       </h3>
+      <h3 className="m-2">
+        Przydzielono godzin ponadwymiarowych.................................
+      </h3>
     </div>
   );
 };

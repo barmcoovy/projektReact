@@ -98,49 +98,107 @@ const OvertimeTable: React.FC = () => {
         />
       </h3>
       <table className="w-full border border-black text-sm text-center">
-        <thead>
-          <tr>
-            <th rowSpan={2} className="border border-black p-1">
-              Tydzień <br /> od <br /> ------- <br />
-              do
+        <tr>
+          <th rowSpan={4} className="border border-black p-1">
+            Tydzień <br /> od <br /> ------- <br />
+            do
+          </th>
+          <th rowSpan={2} className="border border-black p-1">
+            Ilość godzin
+          </th>
+          <th colSpan={6} className="border border-black p-1">
+            Ilość godzin w poszczególnych dniach
+          </th>
+          <th colSpan={9} className="border border-black p-1">
+            Ilość godzin w tygodniu
+          </th>
+        </tr>
+        <tr>
+          <th className="border border-black p-1">P</th>
+          <th className="border border-black p-1">W</th>
+          <th className="border border-black p-1">S</th>
+          <th className="border border-black p-1">CZ</th>
+          <th className="border border-black p-1">P</th>
+          <th className="border border-black p-1">S</th>
+          <th rowSpan={3} className="border border-black">
+            ponadwymiarowych niezrealizowanych
+          </th>
+          <th rowSpan={3} className="border border-black p-1">
+            przydzielonych ponadwymiarowych
+          </th>
+          <th rowSpan={2} className="border border-black p-1">
+            przepracowanych ponadwymiarowych
+          </th>
+          <th rowSpan={3} className="border border-black p-1">
+            płatnych zastępstw
+          </th>
+          <th rowSpan={2} className="border border-black p-1">
+            razem ponadwymiarowych do wypłaty
+          </th>
+        </tr>
+        <tr>
+          <th className="border border-black p-2">Według planu nauczania</th>
+          <td className="border border-black"></td>
+          <td className="border border-black"></td>
+          <td className="border border-black"></td>
+          <td className="border border-black"></td>
+          <td className="border border-black"></td>
+          <td className="border border-black">-</td>
+        </tr>
+        <tr>
+          <th className="border border-black p-2">Przeciętna dzienna</th>
+          <td className="border border-black"></td>
+          <td className="border border-black"></td>
+          <td className="border border-black"></td>
+          <td className="border border-black"></td>
+          <td className="border border-black"></td>
+          <td className="border border-black">-</td>
+          <th className="border border-black">10 - 9</th>
+          <th className="border border-black">11 + 12</th>
+        </tr>
+        <tr>
+          {[...Array(13)].map((_, i) => (
+            <th key={i} className="border border-black p-1">
+              {i + 1}
             </th>
-            <th rowSpan={2} className="border border-black p-1">
-              Ilość godzin
-              <br />
-              według planu nauczania
-            </th>
-            <th colSpan={7} className="border border-black p-1">
-              Ilość godzin w poszczególnych dniach
-            </th>
-          </tr>
-          <tr>
-            <th className="border border-black p-1">P</th>
-            <th className="border border-black p-1">W</th>
-            <th className="border border-black p-1">S</th>
-            <th className="border border-black p-1">CZ</th>
-            <th className="border border-black p-1">P</th>
-          </tr>
-        </thead>
-        <tbody>
-          {weeks.map((week, index) => (
-            <tr key={index}>
-              <td className="border border-black p-1">
-                {week.start.toLocaleDateString()}
-                <br />
-                {week.end.toLocaleDateString()}
-              </td>
-              <td className="border border-black p-1">
-                {formatHoursMinutes(hours)}
-              </td>
-              {[...Array(5)].map((_, i) => (
-                <td key={i} className="border border-black p-1">
-                  {hours > 0 ? formatHoursMinutes(hours / 5) : ""}
-                </td>
-              ))}
-            </tr>
           ))}
-        </tbody>
+        </tr>
+        {weeks.map((week, index) => (
+          <tr key={index}>
+            <td className="border border-black p-1">
+              {week.start.toLocaleDateString()} -
+              <br />
+              {week.end.toLocaleDateString()}
+            </td>
+            <td className="border border-black p-1">
+              {formatHoursMinutes(hours)}
+            </td>
+            {[...Array(5)].map((_, i) => (
+              <td key={i} className="border border-black p-1">
+                {hours > 0 ? formatHoursMinutes(hours / 5) : ""}
+              </td>
+            ))}
+            <td className="border border-black">-</td>
+            {[...Array(5)].map((_, i) => (
+              <td key={i} className="border border-black p-1"></td>
+            ))}
+          </tr>
+        ))}
+        {[...Array(13)].map((_, i) => (
+          <th key={i} className="border border-black p-1">
+            {"-"}
+          </th>
+        ))}
+        <tr>
+          <td className="border border-black p-10"></td>
+          <td colSpan={12} className="border border-black p-10 text-left">
+            Nauczanie indywidualne:
+          </td>
+        </tr>
       </table>
+      <h2 className="mt-12">
+        Sporządził....................................................
+      </h2>
     </div>
   );
 };
