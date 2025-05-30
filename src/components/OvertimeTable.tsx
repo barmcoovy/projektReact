@@ -8,6 +8,32 @@ type MonthArray = {
   month: string;
   number: number;
 };
+function toRoman(num: number): string {
+  const romanMap: [number, string][] = [
+    [1000, "M"],
+    [900, "CM"],
+    [500, "D"],
+    [400, "CD"],
+    [100, "C"],
+    [90, "XC"],
+    [50, "L"],
+    [40, "XL"],
+    [10, "X"],
+    [9, "IX"],
+    [5, "V"],
+    [4, "IV"],
+    [1, "I"],
+  ];
+  let result = "";
+  for (const [value, letter] of romanMap) {
+    while (num >= value) {
+      result += letter;
+      num -= value;
+    }
+  }
+  return result;
+}
+
 const OvertimeTable: React.FC = () => {
   const years: number[] = [2025, 2024, 2023, 2022, 2021, 2020];
   const months: MonthArray[] = [
@@ -99,7 +125,7 @@ const OvertimeTable: React.FC = () => {
       </h3>
       <table className="w-full border border-black text-sm text-center">
         <tr>
-          <th rowSpan={4} className="border border-black p-1">
+          <th colSpan={2} rowSpan={4} className="border border-black p-1">
             Tydzień <br /> od <br /> ------- <br />
             do
           </th>
@@ -157,22 +183,24 @@ const OvertimeTable: React.FC = () => {
           <th className="border border-black">11 + 12</th>
         </tr>
         <tr>
-          {[...Array(13)].map((_, i) => (
+          <th colSpan={2}>1</th>
+          {[...Array(12)].map((_, i) => (
             <th key={i} className="border border-black p-1">
-              {i + 1}
+              {i + 2}
             </th>
           ))}
         </tr>
         {weeks.map((week, index) => (
           <tr key={index}>
-            <td className="border border-black p-1">
-              {week.start.toLocaleDateString()} -
-              <br />
+            <td className="border border-black text-center font-bold">
+              {toRoman(index + 1)}
+            </td>
+            <td className="border border-black text-center p-3">
+              {week.start.toLocaleDateString()} -<br />
               {week.end.toLocaleDateString()}
             </td>
-            <td className="border border-black p-1">
-              {formatHoursMinutes(hours)}
-            </td>
+
+            <td className="">{formatHoursMinutes(hours)}</td>
             {[...Array(5)].map((_, i) => (
               <td key={i} className="border border-black p-1">
                 {hours > 0 ? formatHoursMinutes(hours / 5) : ""}
@@ -184,7 +212,10 @@ const OvertimeTable: React.FC = () => {
             ))}
           </tr>
         ))}
-        {[...Array(13)].map((_, i) => (
+        <th className="border border-black">V</th>
+        <th className="border border-black">-</th>
+        <th className=""></th>
+        {[...Array(11)].map((_, i) => (
           <th key={i} className="border border-black p-1">
             {"-"}
           </th>
